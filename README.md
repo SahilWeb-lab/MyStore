@@ -100,6 +100,12 @@ src/
 └── test/
 </code></pre>
 
+## 📘 API Documentation
+The API is documented using **Swagger UI**:
+
+- 🔗 **Local Swagger URL**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/ecom-docs)
+- 🌐 **Production Swagger URL**: [https://your-domain.com/swagger-ui/index.html](https://your-domain.com/swagger-ui/index.html)
+
 ## 👤 Author
 
 **Sahil Kumar Mandal**
@@ -107,9 +113,3 @@ src/
 - 💼 LinkedIn: (https://www.linkedin.com/in/sahil-mandal-588380245/)
 - 📧 Email: (mandalsahil253@gmail.com)
 - 🐙 GitHub: (https://github.com/SahilWeb-lab)
-
-## 📘 API Documentation
-The API is documented using **Swagger UI**:
-
-- 🔗 **Local Swagger URL**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/ecom-docs)
-- 🌐 **Production Swagger URL**: [https://your-domain.com/swagger-ui/index.html](https://your-domain.com/swagger-ui/index.html)
