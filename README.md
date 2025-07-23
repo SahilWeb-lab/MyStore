@@ -89,7 +89,7 @@ src/
 │ │ ├── routes/
 │ │ ├── security/
 │ │ ├── service/
-│ │ ├── service/impl
+│ │ ├── service/impl/
 │ │ ├── util/
 │ │ ├── validation/
 │ │ └── EcommerceApplication.java
