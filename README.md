@@ -72,6 +72,7 @@ A real-world, production-ready **eCommerce backend** built using **Spring Boot**
 
 ## 📁 Project Structure
 
+<pre> <code>
 src/
 ├── main/
 │ ├── java/com/product/
@@ -97,3 +98,4 @@ src/
 │ ├── application.properties
 │ └── static/
 └── test/
+</code></pre>
