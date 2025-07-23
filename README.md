@@ -123,8 +123,8 @@ The complete API is documented using Swagger UI:
 
 ```bash
 # Clone the repository
-git clone https://github.com/SahilWeb-lab/ecommerce-backend.git
-cd ecommerce-backend
+git clone https://github.com/SahilWeb-lab/MyStore.git
+cd MyStore
 
 # Build and run
 ./mvnw spring-boot:run
