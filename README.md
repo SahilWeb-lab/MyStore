@@ -99,3 +99,11 @@ src/
 │ └── static/
 └── test/
 </code></pre>
+
+## 👤 Author
+
+**Sahil Kumar Mandal**
+
+- 💼 LinkedIn: (https://www.linkedin.com/in/sahil-mandal-588380245/)
+- 📧 Email: (mandalsahil253@gmail.com)
+- 🐙 GitHub: (https://github.com/SahilWeb-lab)
