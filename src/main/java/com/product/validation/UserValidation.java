@@ -56,7 +56,7 @@ public class UserValidation {
 		User user = userRepository.findByEmail(email);
 		
 		if(ObjectUtils.isEmpty(user))
-			throw new ResourceNotFoundException("Invalid Credentials!");
+			throw new ResourceNotFoundException("Invalid Email Address!");
 		
 		String verificationToken = user.getAccountStatus().getAccountVerificationToken();
 		

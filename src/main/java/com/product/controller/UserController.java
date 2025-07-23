@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.product.dto.LoginRequest;
+import com.product.dto.LoginResponse;
 import com.product.dto.PasswordChangeRequest;
 import com.product.dto.UserDTO;
 import com.product.endpoints.UserEndpoint;
@@ -48,7 +49,7 @@ public class UserController implements UserEndpoint {
 	private UserService userService;
 	
 	@Override
-	public String loginUser(LoginRequest loginRequest) throws Exception {
+	public ResponseEntity<?> loginUser(LoginRequest loginRequest) throws Exception {
 		
 //		Check user is verified or not:
 	userValidation.isVerifiedUser(loginRequest.getEmail());
@@ -61,7 +62,10 @@ public class UserController implements UserEndpoint {
 		UserDetails userDetails = userDetailsService.loadUserByUsername(authenticate.getName());
 		String role = authenticate.getAuthorities().stream().findFirst().map(GrantedAuthority::getAuthority).get();
 		String token = jwtUtil.generateToken(userDetails.getUsername(), role);
-		return token;
+		
+		LoginResponse loginResponse = new LoginResponse("You are logged in successfully!", token);
+		
+		return CommonUtils.createBuildResponse(loginResponse, HttpStatus.OK);
 	}
 	
 	public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO, HttpServletRequest request) throws ValidationException, UnsupportedEncodingException, MessagingException {

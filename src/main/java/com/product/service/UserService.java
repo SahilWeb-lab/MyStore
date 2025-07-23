@@ -23,4 +23,8 @@ public interface UserService {
 
 //	Verify Password reset token and change password:
 	public Boolean verifyAndResetPassword(String passwordResetToken, PasswordChangeRequest passwordChangeRequest) throws ResourceNotFoundException, Exception;
+
+//	Create a method to get user profile:
+	public UserDTO getUserProfile() throws ResourceNotFoundException;
+	
 }

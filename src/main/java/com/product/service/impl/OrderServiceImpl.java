@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -180,7 +182,18 @@ public class OrderServiceImpl implements OrderService {
 		Order saveOrder = orderRepository.save(foundOrder);
 		return (ObjectUtils.isEmpty(saveOrder)) ? false : true;
 	}
-	
-	
+
+	@Override
+	public List<OrderResponse> getAllOrdersForAdmin() {
+		List<Order> orders = orderRepository.findAll(Sort.by(Direction.DESC, "id"));
+		List<OrderResponse> orderResponses = orders.stream().map(order -> {
+			OrderResponse orderResponse = modelMapper.map(order, OrderResponse.class);
+			List<OrderItem> orderItems = order.getOrderItems();
+			List<OrderItemDTO> orderItemDTOs = orderItems.stream().map(orderItem -> modelMapper.map(orderItem, OrderItemDTO.class)).toList();
+			orderResponse.setOrderItem(orderItemDTOs);
+			return orderResponse;
+		}).toList();
+		return orderResponses;
+	}
 	
 }

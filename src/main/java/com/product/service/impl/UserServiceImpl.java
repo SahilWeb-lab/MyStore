@@ -24,6 +24,7 @@ import com.product.repository.RoleRepository;
 import com.product.repository.UserRepository;
 import com.product.service.EmailService;
 import com.product.service.UserService;
+import com.product.util.CommonMethods;
 import com.product.validation.UserValidation;
 
 import jakarta.mail.MessagingException;
@@ -52,6 +53,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private AccountStatusRepository accountStatusRepository;
+	
+	@Autowired
+	private CommonMethods commonMethods;
 	
 	@Override
 	public Boolean createUser(UserDTO userDTO, HttpServletRequest request) throws ValidationException, UnsupportedEncodingException, MessagingException {
@@ -139,6 +143,11 @@ public class UserServiceImpl implements UserService {
 		return ObjectUtils.isEmpty(user) ? false : true;
 	}
 
-	
+	@Override
+	public UserDTO getUserProfile() throws ResourceNotFoundException {
+		User loggedInUser = commonMethods.getLoggedInUser();
+		UserDTO userDTO = modelMapper.map(loggedInUser, UserDTO.class);
+		return userDTO;
+	}
 	
 }

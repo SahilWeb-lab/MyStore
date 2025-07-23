@@ -13,7 +13,7 @@ public interface OrderService {
 //	Create a method to create order:
 	public OrderDTO checkOut(CheckoutRequest checkoutRequest) throws Exception, ResourceNotFoundException;
 	
-//	Create a method to get all order:
+//	Create a method to get all order by user:
 	public List<OrderResponse> getAllOrders() throws ResourceNotFoundException;
 	
 //	Create a method to cancel the order: For User
@@ -21,4 +21,7 @@ public interface OrderService {
 	
 //	Create a method to change the status:
 	public Boolean changeOrderStatus(Long orderId, OrderStatus orderStatus) throws ResourceNotFoundException;
+
+//	Create a method to get all orders:
+	public List<OrderResponse> getAllOrdersForAdmin();
 }

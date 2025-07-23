@@ -3,6 +3,8 @@ package com.product.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
@@ -42,6 +44,7 @@ public class CategoryController implements CategoryEndpoint {
 	}
 	
 
+//	@Cacheable(value = "allCategory")
 	public ResponseEntity<?> getCategories(@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "0") Integer pageNo) {
 		CategoryPageResponse categories = categoryService.getCategories(pageNo, pageSize);
 		
@@ -51,7 +54,7 @@ public class CategoryController implements CategoryEndpoint {
 		return CommonUtils.createBuildResponse(categories, HttpStatus.OK);
 	}
 	
-
+//	@CacheEvict(value = "getCategoryById", key = "#categoryId")
 	public ResponseEntity<?> deleteCategory(@PathVariable Integer categoryId) throws ResourceNotFoundException {
 		Boolean deleteCategory = categoryService.deleteCategory(categoryId);
 		
@@ -63,7 +66,7 @@ public class CategoryController implements CategoryEndpoint {
 	
 //	Create a handler to hard delete category:
 	
-
+//	@Cacheable(value = "getCategoryById", key = "#categoryId")
 	public ResponseEntity<?> getCategory(@PathVariable Integer categoryId) throws ResourceNotFoundException {
 		CategoryDTO category = categoryService.getCategory(categoryId);
 		
@@ -104,7 +107,7 @@ public class CategoryController implements CategoryEndpoint {
 		return CommonUtils.createBuildResponse(deletedCategories, HttpStatus.OK);
 	}
 	
-
+//	@Cacheable(value = "activeCategories")
 	public ResponseEntity<?> getAllActiveCategories(@RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize) {
 		CategoryPageResponse allActiveCategories = categoryService.getAllActiveCategories(pageNo, pageSize);
 		

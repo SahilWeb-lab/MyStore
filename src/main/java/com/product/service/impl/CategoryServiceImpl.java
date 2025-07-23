@@ -1,6 +1,5 @@
 package com.product.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +20,7 @@ import com.product.model.Category;
 import com.product.page.response.CategoryPageResponse;
 import com.product.page.response.PaginationInfo;
 import com.product.repository.CategoryRepository;
+import com.product.service.CacheManagerService;
 import com.product.service.CategoryService;
 import com.product.validation.CategoryValidation;
 
@@ -35,6 +35,9 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	private CategoryValidation categoryValidation;
+	
+	@Autowired
+	private CacheManagerService cacheManagerService;
 
 	@Override
 	public Boolean saveCategory(CategoryDTO categoryDTO) throws ValidationException {
@@ -63,8 +66,10 @@ public class CategoryServiceImpl implements CategoryService {
 	public Boolean deleteCategory(Integer categoryId) throws ResourceNotFoundException {
 		Integer totalDeletedCategory = categoryRepository.deleteSingleCategory(categoryId);
 		
-		if(totalDeletedCategory > 0)
+		if(totalDeletedCategory > 0) {
+			cacheManagerService.removeCacheByNames(List.of("allCategory", "activeCategories"));
 			return true;
+		}
 		
 		return false;
 	}

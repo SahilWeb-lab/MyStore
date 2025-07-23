@@ -83,5 +83,15 @@ public class OrderController implements OrderEndpoint {
 		
 		return CommonUtils.createErrorResponseMessage("Failed to change order status!", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+
+
+	@Override
+	public ResponseEntity<?> getAllOrdersForAdmin() {
+		List<OrderResponse> allOrdersForAdmin = orderService.getAllOrdersForAdmin();
+		
+		if(CollectionUtils.isEmpty(allOrdersForAdmin))
+			return ResponseEntity.noContent().build();
+		
+		return CommonUtils.createBuildResponse(allOrdersForAdmin, HttpStatus.OK);
+	}
 }
