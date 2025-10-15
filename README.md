@@ -129,9 +129,7 @@ cd MyStore
 # Build and run
 ./mvnw spring-boot:run
 
-<pre>
-  <code>
-  services:
+services:
   mainapp:
     build:
       context: .
@@ -172,6 +170,12 @@ cd MyStore
       timeout: 5s
       retries: 5
       start_period: 30s
+    restart: always
 
-</code>
-</pre>
+volumes:
+  mysql-data:
+
+networks:
+  ecomapp-network:
+    driver: bridge
+
