@@ -128,3 +128,50 @@ cd MyStore
 
 # Build and run
 ./mvnw spring-boot:run
+
+<pre>
+  <code>
+  services:
+  mainapp:
+    build:
+      context: .
+    container_name: ecomapp
+    depends_on:
+      - mysql_db
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysql_db:3306/ecom_db?allowPublicKeyRetrieval=true&useSSL=false"
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ""
+    ports:
+      - "8080:8080"
+    networks:
+      - ecomapp-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: always
+
+  mysql_db:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: ecom_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - ecomapp-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+</code>
+</pre>
