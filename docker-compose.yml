@@ -1,7 +1,6 @@
 services:
   mainapp:
-    build:
-      context: .
+    image: sahilmandal/mystore-mainapp:latest
     container_name: ecomapp
     depends_on:
       - mysql_db
